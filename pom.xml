@@ -140,10 +140,6 @@
     <sonar.language>java</sonar.language>
 
   </properties>
-  <properties> 
-	  <sonar.host.url>http://40.117.123.236:9000/</sonar.host.url>
-	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
   
   
   <build>
