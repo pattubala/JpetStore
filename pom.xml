@@ -56,8 +56,8 @@
       <url>git:ssh://git@github.com/mybatis/jpetstore-6.git?gh-pages#</url>
     </site>
 	<snapshotRepository>
-		<id>nexus-snapshots</id>
-		<url>http://16.181.235.56:8088/nexus/content/repositories/Jpetstore</url>
+		<id>jpetstore-snapshot</id>
+		<url>http://40.117.123.236:8081/repository/jpetstore-snapshot/</url>
 </snapshotRepository>
 </distributionManagement>
   </distributionManagement> -->
