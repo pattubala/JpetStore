@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tomcat-java
-        image:  aholddevops.azurecr.io/tomcat_java:#{Release.Artifacts._tomcat_java.BuildId}#
+        image:  /sreepadh94/jenkins-tomcat:latest
         ports:
         - containerPort: 8080
 ---
