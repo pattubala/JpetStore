@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deployment-java1
+  labels:
+    app: tomcat-java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-java
+  template:
+    metadata:
+      labels:
+        app: tomcat-java
+    spec:
+      containers:
+      - name: tomcat-java
+        image:  aholddevops.azurecr.io/tomcat_java:#{Release.Artifacts._tomcat_java.BuildId}#
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-service-java1
+spec:
+  type: LoadBalancer
+  selector:
+    app: tomcat-java
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
