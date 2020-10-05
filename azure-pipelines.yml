@@ -23,6 +23,6 @@ steps:
     goals: 'package'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/jpetstore.war'
+    PathtoPublish: '/home/vsts/work/1/s/target/jpetstore.war'
     ArtifactName: 'jpetstore'
     publishLocation: 'Container'
