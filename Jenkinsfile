@@ -85,8 +85,17 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-                      nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: 'sample_jpetstore', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/jpetstore.war']], mavenCoordinate: [artifactId: 'maven-jpetstore', groupId: 'maven-org.mybatis', packaging: 'war', version: 'maven-6.0.2-SNAPSHOT']]]
+                      nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: 'Jpetstore', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/jpetstore.war']], mavenCoordinate: [artifactId: 'maven-jpetstore', groupId: 'maven-org.mybatis', packaging: 'war', version: 'maven-6.0.2-SNAPSHOT']]]
 
+		            }
+				}
+		    }
+		}
+		stage ('Deployment') {
+            steps {
+                dir("${PROJECT_WORKSPACE_PATH}"){
+                    script {
+                     sh "cp -r target/jpetstore.war /var/lib/tomcat8/webapps/jpetstore.war"
 		            }
 				}
 		    }
