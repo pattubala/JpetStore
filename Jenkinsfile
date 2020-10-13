@@ -4,17 +4,6 @@ def sonar_project_key
 def sonar_java_binaries
 def sonar_language
 def sonar_project_name
-
-node {
-  script {
-   def props = readProperties file:'jenkins-variables.properties'
-   def GIT_CLONE_URL = props['git_clone_url']
-   def SONAR_PROJECT_KEY = props['sonar_project_key']
-   def SONAR_JAVA_BINARIES = props['sonar_java_binaries']
-   def SONAR_LANGUAGE = props['sonar_language']
-   def SONAR_PROJECT_NAME = props['sonar_project_name']
-  }
-}
 def getRepoURL()
   {
     repositoryUrl = ${GIT_CLONE_URL}
@@ -52,6 +41,18 @@ pipeline {
             }
             }
         }
+	stage ('Input Variables') {
+	  steps {
+	    script {
+	       props = readProperties file:'jenkins-variables.properties'
+               GIT_CLONE_URL = props['git_clone_url']
+               SONAR_PROJECT_KEY = props['sonar_project_key']
+               SONAR_JAVA_BINARIES = props['sonar_java_binaries']
+               SONAR_LANGUAGE = props['sonar_language']
+               SONAR_PROJECT_NAME = props['sonar_project_name']
+	    }
+	  }
+	} 
         stage ('SCM Checkout') {
           steps {
             dir("${PROJECT_WORKSPACE_PATH}"){
