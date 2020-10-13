@@ -25,16 +25,6 @@ def getRepoFolderName()
     repoFolderName = folderNameArr[0];
     return repoFolderName;
   }
-def sendEmail()
-{
-    mailRecipients = "chittisreepadh@gmail.com"
-    emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.''',
-    mimeType: 'text/html',
-    subject: "${currentBuild.fullDisplayName} - Build ${currentBuild.result}",
-    to: "${mailRecipients}",
-    replyTo: "${mailRecipients}",
-    recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-}
 pipeline {
     agent {label 'master'}
     environment {
@@ -131,14 +121,4 @@ pipeline {
 		    }
 		}
     }
-//Post build action send email in both cases
-post {
-    success {
-        sendEmail();
-    }
-      
-    failure {
-        sendEmail();
-    }
-}
 }
