@@ -6,12 +6,14 @@ def sonar_language
 def sonar_project_name
 
 node {
+  script {
    props = readProperties file:'jenkins-variables.properties'
    GIT_CLONE_URL = props['git_clone_url']
    SONAR_PROJECT_KEY = props['sonar_project_key']
    SONAR_JAVA_BINARIES = props['sonar_java_binaries']
    SONAR_LANGUAGE = props['sonar_language']
    SONAR_PROJECT_NAME = props['sonar_project_name']
+  }
 }
 def getRepoURL()
   {
