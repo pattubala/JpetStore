@@ -116,7 +116,7 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-			    nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: "${ARTIFACTORY_NAME}", packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "{APP_LOCAL_PATH}"]], mavenCoordinate: [artifactId: "${ARTIFACT_ID}", groupId: "${GROUP_ID}", packaging: "${PACKAGING_TYPE}", version: "${ARTIFACT_VERSION}"]]]
+			    nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: "${ARTIFACTORY_NAME}", packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${APP_LOCAL_PATH}"]], mavenCoordinate: [artifactId: "${ARTIFACT_ID}", groupId: "${GROUP_ID}", packaging: "${PACKAGING_TYPE}", version: "${ARTIFACT_VERSION}"]]]
 		            }
 				}
 		    }
@@ -125,7 +125,7 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-			    sh "cp -r ${app_local_path} /var/lib/tomcat8/webapps/${app_name}.war"
+			    sh "cp -r ${APP_LOCAL_PATH} /var/lib/tomcat8/webapps/${APP_NAME}.war"
 		            }
 				}
 		    }
