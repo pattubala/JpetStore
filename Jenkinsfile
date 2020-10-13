@@ -1,12 +1,11 @@
 def props
-def git_clone_url
 def sonar_project_key
 def sonar_java_binaries
 def sonar_language
 def sonar_project_name
 def getRepoURL()
   {
-    repositoryUrl = ${GIT_CLONE_URL}
+    repositoryUrl = "https://github.com/pattubala/JpetStore.git"
     return repositoryUrl;
   }
 def getRepoFolderName()
