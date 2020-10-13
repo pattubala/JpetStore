@@ -1,6 +1,21 @@
+def props
+def git_clone_url
+def sonar_project_key
+def sonar_java_binaries
+def sonar_language
+def sonar_project_name
+
+node {
+   props = readProperties file:'jenkins-variables.properties'
+   GIT_CLONE_URL = props['git_clone_url']
+   SONAR_PROJECT_KEY = props['sonar_project_key']
+   SONAR_JAVA_BINARIES = props['sonar_java_binaries']
+   SONAR_LANGUAGE = props['sonar_language']
+   SONAR_PROJECT_NAME = props['sonar_project_name']
+}
 def getRepoURL()
   {
-    repositoryUrl = "https://github.com/pattubala/JpetStore.git"
+    repositoryUrl = ${GIT_CLONE_URL}
     return repositoryUrl;
   }
 def getRepoFolderName()
@@ -50,8 +65,7 @@ pipeline {
                 script {
 				    stage ('Static Code Analysis') {
                         withSonarQubeEnv('Sonarqube_7.6') {
-	    			    def SONARQUBE_URL = 'http://13.82.147.110:9000/';
-                        sh "mvn sonar:sonar -Dsonar.projectKey=jpetstore -Dsonar.java.binaries=. -Dsonar.language=java -Dsonar.sourceEncoding=UTF-8"
+                        sh "mvn sonar:sonar -Dsonar.projectName=${SONAR_PROJECT_NAME} -Dsonar.projectKey=${SONAR_PROJECT_NAME} -Dsonar.java.binaries=${sonar_java_binaries} -Dsonar.language=${SONAR_LANGUAGE} -Dsonar.sourceEncoding=UTF-8"
                         } 
 				    }
                     stage('Quality Check') {
