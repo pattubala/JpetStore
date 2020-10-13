@@ -72,6 +72,7 @@ pipeline {
 	       PACKAGING_TYPE = props['packaging_type']
 	       ARTIFACT_VERSION = props['artifact_version']
 	       APP_NAME = props['app_name']
+	       APP_LOCAL_PATH = props['app_local_path']
 	    }
 	  }
 	} 
