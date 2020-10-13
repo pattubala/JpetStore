@@ -1,11 +1,24 @@
 def props
+def git_clone_url
 def sonar_project_key
 def sonar_java_binaries
 def sonar_language
 def sonar_project_name
+
+node {
+   git (url: "https://github.com/pattubala/JpetStore.git",
+        branch: 'master',
+        credentialsId: 'Github')
+   props = readProperties file:'jenkins-variables.properties'
+   GIT_CLONE_URL = props['git_clone_url']
+   SONAR_PROJECT_KEY = props['sonar_project_key']
+   SONAR_JAVA_BINARIES = props['sonar_java_binaries']
+   SONAR_LANGUAGE = props['sonar_language']
+   SONAR_PROJECT_NAME = props['sonar_project_name']
+}
 def getRepoURL()
   {
-    repositoryUrl = "https://github.com/pattubala/JpetStore.git"
+    repositoryUrl = ${GIT_CLONE_URL}
     return repositoryUrl;
   }
 def getRepoFolderName()
@@ -40,7 +53,7 @@ pipeline {
             }
             }
         }
-	stage ('SCM Checkout') {
+        stage ('SCM Checkout') {
           steps {
             dir("${PROJECT_WORKSPACE_PATH}"){
             git (url: "${getRepoURL()}",
@@ -49,18 +62,6 @@ pipeline {
            }
           }
         }
-	stage ('Input Variables') {
-	  steps {
-	    script {
-	       props = readProperties file:'jenkins-variables.properties'
-               GIT_CLONE_URL = props['git_clone_url']
-               SONAR_PROJECT_KEY = props['sonar_project_key']
-               SONAR_JAVA_BINARIES = props['sonar_java_binaries']
-               SONAR_LANGUAGE = props['sonar_language']
-               SONAR_PROJECT_NAME = props['sonar_project_name']
-	    }
-	  }
-	} 
         stage("SONARQUBE") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
