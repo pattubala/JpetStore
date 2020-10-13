@@ -40,6 +40,15 @@ pipeline {
             }
             }
         }
+	stage ('SCM Checkout') {
+          steps {
+            dir("${PROJECT_WORKSPACE_PATH}"){
+            git (url: "${getRepoURL()}",
+            branch: 'master',
+            credentialsId: 'Github')
+           }
+          }
+        }
 	stage ('Input Variables') {
 	  steps {
 	    script {
@@ -52,15 +61,6 @@ pipeline {
 	    }
 	  }
 	} 
-        stage ('SCM Checkout') {
-          steps {
-            dir("${PROJECT_WORKSPACE_PATH}"){
-            git (url: "${getRepoURL()}",
-            branch: 'master',
-            credentialsId: 'Github')
-           }
-          }
-        }
         stage("SONARQUBE") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
