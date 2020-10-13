@@ -3,6 +3,14 @@ def sonar_project_key
 def sonar_java_binaries
 def sonar_language
 def sonar_project_name
+def artifactory_name
+def app_local_path
+def artifact_id
+def group_id
+def packaging_type
+def artifact_version
+def app_name
+		
 def getRepoURL()
   {
     repositoryUrl = "https://github.com/pattubala/JpetStore.git"
@@ -58,6 +66,12 @@ pipeline {
                SONAR_JAVA_BINARIES = props['sonar_java_binaries']
                SONAR_LANGUAGE = props['sonar_language']
                SONAR_PROJECT_NAME = props['sonar_project_name']
+	       ARTIFACTORY_NAME = props['artifactory_name']
+	       ARTIFACT_ID = props['artifact_id']
+	       GROUP_ID = props['group_id']
+	       PACKAGING_TYPE = props['packaging_type']
+	       ARTIFACT_VERSION = props['artifact_version']
+	       APP_NAME = props['app_name']
 	    }
 	  }
 	} 
@@ -101,7 +115,7 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-                      nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: 'Jpetstore', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/jpetstore.war']], mavenCoordinate: [artifactId: 'maven-jpetstore', groupId: 'maven-org.mybatis', packaging: 'war', version: 'maven-6.0.2-SNAPSHOT']]]
+			    nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: ${ARTIFACTORY_NAME}, packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "{APP_LOCAL_PATH}"]], mavenCoordinate: [artifactId: ${ARTIFACT_ID}, groupId: ${GROUP_ID}, packaging: ${PACKAGING_TYPE}, version: ${ARTIFACT_VERSION}]]]
 
 		            }
 				}
@@ -111,7 +125,7 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-                     sh "cp -r target/jpetstore.war /var/lib/tomcat8/webapps/jpetstore.war"
+			    sh "cp -r ${app_local_path} /var/lib/tomcat8/webapps/${app_name}.war"
 		            }
 				}
 		    }
