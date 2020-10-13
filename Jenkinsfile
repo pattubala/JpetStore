@@ -115,8 +115,7 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-			    nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: ${ARTIFACTORY_NAME}, packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "{APP_LOCAL_PATH}"]], mavenCoordinate: [artifactId: ${ARTIFACT_ID}, groupId: ${GROUP_ID}, packaging: ${PACKAGING_TYPE}, version: ${ARTIFACT_VERSION}]]]
-
+			    nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: "${ARTIFACTORY_NAME}", packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "{APP_LOCAL_PATH}"]], mavenCoordinate: [artifactId: "${ARTIFACT_ID}", groupId: "${GROUP_ID}", packaging: "${PACKAGING_TYPE}", version: "${ARTIFACT_VERSION}"]]]
 		            }
 				}
 		    }
