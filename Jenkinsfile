@@ -76,6 +76,7 @@ pipeline {
 			    sonar_project_key: "${SONAR_PROJECT_KEY}",
 			    sonar_java_binaries: "${SONAR_JAVA_BINARIES}",
 			    sonar_language: "${SONAR_LANGUAGE}"
+		    )
                     }	
                 }
             }
