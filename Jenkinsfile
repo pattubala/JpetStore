@@ -90,7 +90,6 @@ pipeline {
                     }	
                 }
             }
-          }
           stage ('Maven Build') {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
