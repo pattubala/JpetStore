@@ -1,3 +1,4 @@
+@Library('jenkins-library@master') _
 def props
 def sonar_project_key
 def sonar_java_binaries
@@ -66,33 +67,30 @@ pipeline {
 	    }
 	  }
 	} 
-        stage("SONARQUBE") {
+        stage("SONARQUBE STATIC CODE ANALYSIS") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
-                script {
-				    stage ('Static Code Analysis') {
-                        withSonarQubeEnv('Sonarqube_7.6') {
-                        sh "mvn sonar:sonar -Dsonar.projectName=${SONAR_PROJECT_NAME} -Dsonar.projectKey=${SONAR_PROJECT_NAME} -Dsonar.java.binaries=${SONAR_JAVA_BINARIES} -Dsonar.language=${SONAR_LANGUAGE} -Dsonar.sourceEncoding=UTF-8"
-                        } 
-				    }
-                    stage('Quality Check') {
-                        sleep(60);
-                        timeout(time: 1, unit: 'MINUTES') { // If something goes wrong pipeline will be killed after a timeout
-                        def qg = waitForQualityGate();
-                        if (qg.status != "OK") {
-                         currentBuild.result='FAILURE';
-                         error "Pipeline aborted due to quality gate coverage failure: ${qg.status}"
-                        }
-                        else{
-                           echo "Quality gate passed: ${qg.status}" 
-                        }
-                        }
+                  script {
+                    codeScan( 
+			    sonar_project_name: "${SONAR_PROJECT_NAME}"
+			    sonar_project_key: "${SONAR_PROJECT_KEY}"
+			    sonar_java_binaries: "${SONAR_JAVA_BINARIES}"
+			    sonar_language: "${SONAR_LANGUAGE}"
                     }	
                 }
             }
           }
-		}		
-		stage ('Maven Build') {
+        stage("QUALITY GATES CHECK") {
+            steps {
+                dir("${PROJECT_WORKSPACE_PATH}"){
+                  script {
+                     qualityGates()
+                    } 
+                    }	
+                }
+            }
+          }
+          stage ('Maven Build') {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
