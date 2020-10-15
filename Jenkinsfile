@@ -70,11 +70,11 @@ pipeline {
         stage("SONARQUBE STATIC CODE ANALYSIS") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
-                    codeScan( 
-			    SONAR-PROJECT-NAME: "${SONAR_PROJECT_NAME}",
-			    SONAR-PROJECT-NAME: "${SONAR_PROJECT_KEY}",
-			    SONAR-PROJECT-NAME: "${SONAR_JAVA_BINARIES}",
-			    SONAR-PROJECT-NAME: "${SONAR_LANGUAGE}"
+                    codeScan(
+			    projectname: "${SONAR_PROJECT_NAME}",
+			    projectkey: "${SONAR_PROJECT_KEY}",
+			    javabinaries: "${SONAR_JAVA_BINARIES}",
+			    language: "${SONAR_LANGUAGE}"
 		    )	
                 }
             }
