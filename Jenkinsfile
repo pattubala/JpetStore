@@ -1,4 +1,4 @@
-@Library('jenkins_library@master') _
+@Library('jenkins_library@main') _
 def props
 def sonar_project_key
 def sonar_java_binaries
