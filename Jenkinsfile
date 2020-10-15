@@ -70,24 +70,20 @@ pipeline {
         stage("SONARQUBE STATIC CODE ANALYSIS") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
-                  script {
                     codeScan( 
 			    sonar_project_name: "${SONAR_PROJECT_NAME}",
 			    sonar_project_key: "${SONAR_PROJECT_KEY}",
 			    sonar_java_binaries: "${SONAR_JAVA_BINARIES}",
 			    sonar_language: "${SONAR_LANGUAGE}"
-		    )
-                    }	
+		    )	
                 }
             }
           }
         stage("QUALITY GATES CHECK") {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
-                  script {
                      qualityGates()
                     } 
-                    }	
                 }
             }
           stage ('Maven Build') {
