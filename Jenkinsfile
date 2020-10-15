@@ -71,10 +71,10 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     codeScan( 
-			    sonar_project_name: "${SONAR_PROJECT_NAME}",
-			    sonar_project_key: "${SONAR_PROJECT_KEY}",
-			    sonar_java_binaries: "${SONAR_JAVA_BINARIES}",
-			    sonar_language: "${SONAR_LANGUAGE}"
+			    SONAR-PROJECT-NAME: "${SONAR_PROJECT_NAME}",
+			    SONAR-PROJECT-NAME: "${SONAR_PROJECT_KEY}",
+			    SONAR-PROJECT-NAME: "${SONAR_JAVA_BINARIES}",
+			    SONAR-PROJECT-NAME: "${SONAR_LANGUAGE}"
 		    )	
                 }
             }
