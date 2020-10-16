@@ -53,7 +53,6 @@ pipeline {
 	}
       stage("JpetStore") {
 	    steps {
-		  script {
                      jenkinsCode(
 	                GIT_CLONE_URL: "${SONAR_PROJECT_NAME}",
 		        BRANCH_NAME: "${BRANCH_NAME}",
@@ -70,7 +69,6 @@ pipeline {
 			APP_NAME: "${APP_NAME}",
 			APP_LOCAL_PATH: "${APP_LOCAL_PATH}",	
 		    )
-		  }
 		}
 	  }
     }
