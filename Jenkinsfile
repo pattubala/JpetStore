@@ -28,9 +28,6 @@ def getRepoFolderName()
   }
 pipeline {
     agent {label 'master'}
-    environment {
-        PROJECT-WORKSPACE-PATH = "/var/lib/jenkins/workspace/${getRepoFolderName().toString().toUpperCase()}/";
-    }
     stages {
 	stage ('Input Variables') {
 	  steps {
