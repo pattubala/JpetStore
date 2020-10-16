@@ -11,6 +11,8 @@ def group_id
 def packaging_type
 def artifact_version
 def app_name
+def branch_name
+def github_clone_url
 		
 def getRepoURL()
   {
