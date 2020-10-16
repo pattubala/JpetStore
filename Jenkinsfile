@@ -13,21 +13,7 @@ def artifact_version
 def app_name
 def branch_name
 def github_clone_url
-		
-def getRepoURL()
-  {
-    repositoryUrl = "https://github.com/pattubala/JpetStore.git"
-    return repositoryUrl;
-  }
-def getRepoFolderName()
-  {
-    repository = getRepoURL();
-    String[] repoPathDetails = repository.split("pattubala/");
-    folderNameDetails = repoPathDetails[1];
-    String[] folderNameArr = folderNameDetails.split(".git");
-    repoFolderName = folderNameArr[0];
-    return repoFolderName;
-  }
+def project_workspace_path
 pipeline {
     agent {label 'master'}
     stages {
@@ -49,7 +35,7 @@ pipeline {
 	       APP_LOCAL_PATH = props['app_local_path']
 	       GITHUB_CLONE_URL = props['github_clone_url']
 	       BRANCH_NAME = props['branch_name']
-	       PROJECTWORKSPACEPATH = props['PROJECT-WORKSPACE-PATH']
+	       PROJECTWORKSPACEPATH = props['project_workspace_path']
 	    }
 	  }
 	}
