@@ -50,7 +50,7 @@ pipeline {
 	  }
      stage("CodeScan") {
 	    steps {
-         codeScan(
+         sonarSaticCodeAnalysis(
 		    PROJECT_WORKSPACE_PATH: "${PROJECTWORKSPACEPATH}",
 			SONAR_PROJECT_KEY: "${SONAR_PROJECT_KEY}",
 			SONAR_JAVA_BINARIES: "${SONAR_JAVA_BINARIES}",
