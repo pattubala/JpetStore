@@ -56,6 +56,7 @@ pipeline {
 			SONAR_JAVA_BINARIES: "${SONAR_JAVA_BINARIES}",
 			SONAR_LANGUAGE: "${SONAR_LANGUAGE}",
 		    SONAR_PROJECT_NAME: "${SONAR_PROJECT_NAME}",
+		  )
 		}
 	  }
       stage("Quality Gates") {
